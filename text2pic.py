@@ -36,17 +36,17 @@ def create_image(text, font_path='simhei.ttf', font_size=40):
 
 
 
-def read_file_and_create_images(file_path, output_folder, words_per_image=100):
+def read_file_and_create_images(file_path, output_folder, lines_per_image=3):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
-        words = content.split()
-        num_words = len(words)
-        num_images = (num_words + words_per_image - 1) // words_per_image
+        lines = content.split()
+        num_lines = len(lines)
+        num_images = (num_lines + lines_per_image - 1) // lines_per_image
 
         for i in range(num_images):
-            start = i * words_per_image
-            end = min((i + 1) * words_per_image, num_words)
-            text = '\n'.join(words[start:end])
+            start = i * lines_per_image
+            end = min((i + 1) * lines_per_image, num_lines)
+            text = '\n'.join(lines[start:end])
             image = create_image(text,"C:\\Windows\\Fonts\\simhei.ttf")
             image.save(f'{output_folder}/image_{i}.png')
             
